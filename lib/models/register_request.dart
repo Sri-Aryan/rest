@@ -84,7 +84,7 @@ class RegisterRequest {
       'business_hours': businessHours.toJson(),
       'device_token': deviceToken,
       'type': type,
-      if (socialId != null) 'social_id': socialId,
+      'social_id': "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
     };
   }
 }
