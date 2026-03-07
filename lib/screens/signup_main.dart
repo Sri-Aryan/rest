@@ -20,6 +20,7 @@ class _MainSignupScreenState extends State<MainSignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFFFFF8F6),
       body: SafeArea(
         child: Padding(
@@ -30,7 +31,6 @@ class _MainSignupScreenState extends State<MainSignupScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 40),
-
                 Row(
                   children: [
                     Text(

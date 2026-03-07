@@ -22,7 +22,7 @@ class LoginRequest {
       'role': "farmer",
       'device_token': "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
       'type': type,
-      if (socialId != null) 'social_id': "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
+      if (socialId != null) 'social_id': socialId,
     };
   }
 }

@@ -25,17 +25,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             SizedBox(height: 8),
             Text('Enter your mobile number', style: TextStyle(color: Colors.black54)),
             SizedBox(height: 48),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: Color(0xFFF5F5F5),
-            //     borderRadius: BorderRadius.circular(16),
-            //   ),
-            //   child: TextField(
-            //     controller: _mobileController,
-            //     decoration: InputDecoration(labelText: 'Mobile', prefixIcon: Icon(Icons.phone)),
-            //     keyboardType: TextInputType.phone,
-            //   ),
-            // ),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFFF5F5F5),
@@ -74,6 +63,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
   void _sendOtp() {
     ref.read(authProvider.notifier).forgotPassword(ForgotPasswordRequest(mobile: _mobileController.text));
-    Navigator.push(context, MaterialPageRoute(builder: (_) => OtpScreen(isReset: true)));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => OtpScreen(isReset: true, email: '+1984512598',)));
   }
 }
