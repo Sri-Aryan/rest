@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rest/screens/login_main.dart';
-import 'package:rest/screens/login_scteen.dart';
+import 'package:rest/screens/onboarding.dart';
 import 'package:rest/screens/signup_confirm.dart';
 import 'package:rest/screens/signup_hours.dart';
 import 'package:rest/screens/signup_info.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Auth App',
       theme: ThemeData(primarySwatch: Colors.orange),
-      home: WelcomeScreen(),
+      home: OnboardingScreen(),
       routes: {
         '/login': (context) => WelcomeScreen()  ,
         '/signup-form': (context) => SignupFormInfoScreen(),
