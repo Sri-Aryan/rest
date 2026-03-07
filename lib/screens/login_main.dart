@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rest/models/login_request.dart';
 import 'package:rest/screens/forgot.dart';
 import 'package:rest/screens/signup_info.dart';
 import 'package:rest/screens/signup_main.dart';
+
+import '../models/api.dart';
+import '../providers/auth_providers.dart';
+import 'home.dart';
 
 class WelcomeScreen extends ConsumerStatefulWidget {
   @override
@@ -14,6 +19,61 @@ class _LoginScreenState extends ConsumerState<WelcomeScreen> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // Listen to auth state changes
+    ref.listen<AsyncValue<ApiResponse?>>(authProvider, (previous, next) {
+      next.when(
+        data: (response) {
+          if (response?.success == 'true') {
+            // Login successful - navigate to home
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => HomeScreen()),
+                  (route) => false,
+            );
+          } else {
+            // Show API error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(response?.message ?? 'Login failed'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        loading: () {
+          // Show loading (already handled in UI)
+        },
+        error: (error, stack) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Network error: $error'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        },
+      );
+    });
+  }
+
+  void _login() {
+    //if (_formKey.currentState!.validate()) {
+      // ✅ FIXED: Use .text to get string values from controllers
+      ref.read(authProvider.notifier).login(
+        LoginRequest(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+          role: "farmer",
+          deviceToken: "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
+          type: 'email',
+          // socialId only needed for social login, make optional
+        ),
+      );
+    //}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -229,10 +289,19 @@ class _LoginScreenState extends ConsumerState<WelcomeScreen> {
     );
   }
 
-  void _login() {
-    if (_formKey.currentState!.validate()) {
-      // Call your auth provider here
-      // ref.read(authProvider.notifier).login(...);
-    }
-  }
+  // void _login() {
+  //   if (_formKey.currentState!.validate()) {
+  //     // Call your auth provider here
+  //     ref.read(authProvider.notifier).login(
+  //       LoginRequest(
+  //         email: _emailController,
+  //         password: _passwordController,
+  //         role: "farmer",
+  //         deviceToken: "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
+  //         type: 'email',
+  //         socialId : "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
+  //       )
+  //     );
+  //   }
+  // }
 }
