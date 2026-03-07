@@ -57,7 +57,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
                   ),
                   SizedBox(width: 20),
 
-                  // App Title + Progress
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +86,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
               ),
             ),
 
-            // Main Content
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 22),
@@ -97,7 +95,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
                   children: [
                     SizedBox(height: 32),
 
-                    // Title + Subtitle
                     Text(
                       'Business Hours',
                       style: TextStyle(
@@ -118,7 +115,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
                     ),
                     SizedBox(height: 38),
 
-                    // Days Toggle Row - EXACTLY like image
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10,),
                       decoration: BoxDecoration(
@@ -145,7 +141,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
                     ),
                     SizedBox(height: 32),
 
-                    // Time Slots - Multiple selectable times
                     Column(
                       children: [
                         _buildTimeSlot('8:00am - 10:00am', 0),
@@ -160,7 +155,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
 
                     SizedBox(height: 60),
 
-                    // Sign Up Button
                     Container(
                       width: double.infinity,
                       height: 60,
@@ -219,7 +213,7 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
           if (isActive) {
             businessHours[dayKey] = [];
           } else {
-            businessHours[dayKey] = ['8:00am - 10:00am']; // Default time
+            businessHours[dayKey] = ['8:00am - 10:00am'];
           }
         });
       },
@@ -258,15 +252,12 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          // Toggle time slot for active days
           bool anyDayHasThisTime = businessHours.values.any((times) => times.contains(time));
           if (anyDayHasThisTime) {
-            // Remove from all days
             businessHours.forEach((day, times) {
               businessHours[day] = times.where((t) => t != time).toList();
             });
           } else {
-            // Add to all active days
             businessHours.forEach((day, times) {
               if (times.isNotEmpty) {
                 if (!times.contains(time)) {
@@ -276,7 +267,6 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
             });
           }
 
-          // Clean up empty days
           businessHours.forEach((day, times) {
             if (times.isEmpty) {
               businessHours[day] = [];
