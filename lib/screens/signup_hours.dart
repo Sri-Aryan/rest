@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rest/screens/signup_confirm.dart';
-import 'package:rest/screens/signup_verify.dart';
 
 class SignupHoursScreen extends StatefulWidget {
   final Map<String, dynamic> formData;
@@ -26,16 +25,14 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
     widget.formData['business_hours'] = businessHours;
 
     return Scaffold(
-      backgroundColor: Color(0xFFFFF8F6), // Light peach background
+      backgroundColor: Color(0xFFFFF8F6),
       body: SafeArea(
         child: Column(
           children: [
-            // Custom AppBar - EXACTLY like previous screens
             Container(
               padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
               child: Row(
                 children: [
-                  // Back Arrow
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
@@ -93,7 +90,7 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
             // Main Content
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 32),
+                padding: EdgeInsets.symmetric(horizontal: 22),
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,10 +120,10 @@ class _SignupHoursScreenState extends State<SignupHoursScreen> {
 
                     // Days Toggle Row - EXACTLY like image
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 12,),
+                      padding: EdgeInsets.symmetric(vertical: 10,),
                       decoration: BoxDecoration(
                         color: Color(0xFFF8F9FA),
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         children: [
