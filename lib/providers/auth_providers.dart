@@ -55,7 +55,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<ApiResponse?>> {
     try {
       print("$formData");
       final response = await dio.post('/user/register', data: formData);
-      print("$response");
+      print("--------------------$response");
       state = AsyncValue.data(ApiResponse.fromJson(response.data));
     } on DioException catch (e) {
       String errorMessage = e.response?.data['message'] ??

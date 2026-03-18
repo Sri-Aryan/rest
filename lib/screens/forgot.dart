@@ -63,6 +63,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
   void _sendOtp() {
     ref.read(authProvider.notifier).forgotPassword(ForgotPasswordRequest(mobile: _mobileController.text));
-    Navigator.push(context, MaterialPageRoute(builder: (_) => OtpScreen(isReset: true, email: '+1984512598',)));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => OtpScreen(isReset: true, email: "johndoe@mail.com",)));
   }
 }
