@@ -21,7 +21,7 @@ class LoginRequest {
       'password': password,
       'role': "farmer",
       'device_token': "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
-      'type': type,
+      'type': "email/facebook/google/apple",
       if (socialId != null) 'social_id': socialId,
     };
   }
