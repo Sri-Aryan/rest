@@ -192,7 +192,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
       VerifyOtpRequest(otp: "895642"),
     );
 
-    Navigator.push(context, MaterialPageRoute(builder: (_) => SignupConfirmationScreen(formData: formData)));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => ResetPasswordScreen()));
   }
 
   void _resendOtp() {
