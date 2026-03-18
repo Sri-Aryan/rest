@@ -23,6 +23,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<ApiResponse?>> {
   Future<void> login(LoginRequest request) async {
     state = const AsyncValue.loading();
     try {
+      print("$request");
       final response = await dio.post('/user/login', data: request.toJson());
       final apiResponse = ApiResponse.fromJson(response.data);
 
@@ -52,7 +53,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<ApiResponse?>> {
   Future<void> register(FormData formData) async {
     state = const AsyncValue.loading();
     try {
+      print("$formData");
       final response = await dio.post('/user/register', data: formData);
+      print("$response");
       state = AsyncValue.data(ApiResponse.fromJson(response.data));
     } on DioException catch (e) {
       String errorMessage = e.response?.data['message'] ??
@@ -72,6 +75,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<ApiResponse?>> {
     state = const AsyncValue.loading();
     try {
       final response = await dio.post('/user/forgot-password', data: request.toJson());
+      print("$response");
       state = AsyncValue.data(ApiResponse.fromJson(response.data));
     } on DioException catch (e) {
       String errorMessage = e.response?.data['message'] ??
@@ -90,7 +94,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<ApiResponse?>> {
   Future<void> verifyOtp(VerifyOtpRequest request) async {
     state = const AsyncValue.loading();
     try {
-      final response = await dio.post('/user/verify-otp', data: request.toJson());
+      final response = await dio.post('/user/verify-otp', data: {
+        "otp":"895642"
+      });
+      print("$response");
       state = AsyncValue.data(ApiResponse.fromJson(response.data));
     } on DioException catch (e) {
       String errorMessage = e.response?.data['message'] ??
@@ -109,7 +116,13 @@ class AuthNotifier extends StateNotifier<AsyncValue<ApiResponse?>> {
   Future<void> resetPassword(ResetPasswordRequest request) async {
     state = const AsyncValue.loading();
     try {
-      final response = await dio.post('/user/reset-password', data: request.toJson());
+      final response = await dio.post('/user/reset-password', data:
+      {
+        "token": "895642",
+        "password": "12345",
+        "cpassword": "12345"
+      });
+      print("$response");
       state = AsyncValue.data(ApiResponse.fromJson(response.data));
     } on DioException catch (e) {
       String errorMessage = e.response?.data['message'] ??
