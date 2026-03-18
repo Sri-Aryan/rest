@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../models/register_request.dart';
 import '../providers/auth_providers.dart';
 
 class SignupConfirmationScreen extends ConsumerStatefulWidget {
@@ -68,19 +69,59 @@ class _SignupConfirmationScreenState extends ConsumerState<SignupConfirmationScr
     );
   }
 
+
   Future<void> _submitRegistration() async {
     setState(() => _isSubmitting = true);
 
-    FormData formData = FormData.fromMap({
-      'registerData': widget.formData,
-    });
+    // 1. Instantiate your model (Map your widget.formData to the class)
+    final request = RegisterRequest(
+      fullName: widget.formData['full_name'],
+      email: widget.formData['email'],
+      phone: widget.formData['phone'],
+      password: widget.formData['password'],
+      role: widget.formData['role'],
+      businessName: widget.formData['business_name'],
+      informalName: widget.formData['informal_name'],
+      address: widget.formData['address'],
+      city: widget.formData['city'],
+      state: widget.formData['state'],
+      zipCode: widget.formData['zip_code'],
+      businessHours: widget.formData['business_hours'], // Ensure this maps correctly to your BusinessHours class
+      deviceToken: "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx", // Hardcoded
+      type: "email", // Hardcoded
+      socialId: "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx", // Hardcoded
+    );
+
+    // 2. Use the model's toJson() which contains your hardcoded logic
+    FormData formData = FormData.fromMap(request.toJson());
 
     await ref.read(authProvider.notifier).register(formData);
 
     setState(() => _isSubmitting = false);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Registration Complete!')),
+      const SnackBar(content: Text('Registration Complete!')),
     );
   }
+  //
+  // Future<void> _submitRegistration() async {
+  //   setState(() => _isSubmitting = true);
+  //
+  //   widget.formData['social_id'] = "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx";
+  //   widget.formData['type'] = "email/facebook/google/apple";
+  //   widget.formData['device_token'] = "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx";
+  //
+  //   FormData formData = FormData.fromMap({
+  //     'registerData': widget.formData,
+  //   });
+  //
+  //
+  //   await ref.read(authProvider.notifier).register(formData);
+  //
+  //   setState(() => _isSubmitting = false);
+  //
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(content: Text('Registration Complete!')),
+  //   );
+  // }
 }
