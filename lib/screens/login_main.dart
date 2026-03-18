@@ -39,7 +39,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
           password: _passwordController.text.trim(),
           role: "farmer",
           deviceToken: "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
-          type: "email",
+          type: "email/facebook/google/apple",
           socialId: "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx"
         ),
       );
