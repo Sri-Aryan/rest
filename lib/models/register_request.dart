@@ -82,8 +82,8 @@ class RegisterRequest {
       'zip_code': zipCode,
       if (registrationProof != null) 'registration_proof': registrationProof,
       'business_hours': businessHours.toJson(),
-      'device_token': deviceToken,
-      'type': type,
+      'device_token': "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
+      'type': "email/facebook/google/apple",
       'social_id': "0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx",
     };
   }
